@@ -18,10 +18,3 @@
 .button.activated{
     background-color: rgb(17, 113, 217);
 }
-
-.btn-store:pressed{
-    background-color: transparent;
-}
-.btn-robot:pressed{
-    background-color: transparent;
-}

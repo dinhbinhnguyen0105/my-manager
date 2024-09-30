@@ -1,0 +1,52 @@
+.robot {
+    background-color: transparent;
+}
+
+.robot__setting {
+    min-width: 120px;
+    max-width: 160px;
+    background-color: transparent;
+}
+.robot__setting__title {
+    color: rgb(0, 145, 255);
+}
+
+.robot__setting__system {
+    
+}
+.robot__setting__select{}
+.robot__setting__options{}
+
+.robot__setting__option{}
+.robot__setting__system{}
+
+.robot__actions {
+    min-width: 120px;
+    max-width: 160px;
+    background-color: #AEAEAE;
+}
+.robot__actions__title {
+    color: blue;
+}
+.robot__content {
+    background-color: #979797;
+}
+.robot__content__title {
+    
+    color: blue;
+}
+
+.title {
+    padding: 10px;
+}
+.label {
+    height: 14px;
+    margin-top: 12px;
+    font-size: 10px;
+    color: rgb(9,9,9);
+}
+.input {
+    margin-top: 2px;
+    border-radius: 4px;
+    height: 24px;
+}

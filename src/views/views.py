@@ -1,13 +1,14 @@
 import os
 from PyQt5.QtWidgets import QFrame, QHBoxLayout, QStackedWidget
-from PyQt5.QtCore import QFile, QIODevice, QTextStream, Qt
+from PyQt5.QtCore import QFile, QIODevice, QTextStream, Qt, pyqtSignal
 
-from .pages.page import Page
+from .pages.pages import Pages
 from .sidebar.sidebar import Sidebar
 
 MY_DIR = os.path.abspath(os.path.join(__file__, os.path.pardir))
 
 class View(QFrame):
+    payload = pyqtSignal(dict)
     def __init__(self, parent=None):
         super().__init__(parent)
         self.setObjectName("view")
@@ -17,12 +18,16 @@ class View(QFrame):
         main_layout.setSpacing(0)
         self.setLayout(main_layout)
 
-        # self.page = Page(self)
+        self.pages = Pages(self)
         self.sidebar = Sidebar(self)
+        self.sidebar.current_page_index.connect(self.handle_set_current_page)
         main_layout.addWidget(self.sidebar)
-        main_layout.setAlignment(Qt.AlignLeft)
-        # main_layout.addWidget(self.page)
+        # main_layout.setAlignment(Qt.AlignLeft)
+        main_layout.addWidget(self.pages)
 
         with open(f"{MY_DIR}/views.styles.qss", "r") as f:
             styles = f.read()
         self.setStyleSheet(styles)
+    
+    def handle_set_current_page(self, index):
+        self.pages.handel_set_page(index)
