@@ -1,0 +1,21 @@
+.dialog {
+
+}
+.create-item {
+
+}
+.dialog__create-item__options {
+
+}
+.option {
+    margin: 0 4px;
+    height: 32px;
+    border: 1px solid #979797;
+    background: transparent;
+    border-radius: 4px;
+}
+
+.option.activated {
+    color: blue;
+    border: 1px solid rgb(0, 145, 255);
+}
