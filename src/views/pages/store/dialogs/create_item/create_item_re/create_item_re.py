@@ -12,9 +12,11 @@ class CreateItemRe(QFrame):
     current_option_event = pyqtSignal(str)
     def __init__(self, parent=None):
         super().__init__(parent)
-        self.setProperty("class", "dialog__create-item__re")
-        self.setObjectName("dialog__create-item__re")
+        self.setProperty("class", "create-item re")
+        self.setObjectName("re")
         main_layout = QVBoxLayout()
         main_layout.setContentsMargins(0,0,0,0)
         main_layout.setSpacing(0)
         self.setLayout(main_layout)
+
+        main_layout.addWidget(QLabel("RE"))
