@@ -9,21 +9,24 @@ class ImageBox(QFrame):
     def __init__(self, parent=None):
         super().__init__(parent)
         self.prev_point, self.curr_point, self.slide, self.images_count, self.image_folder, self.urls = 0, 0, 0, 0, None, []
+        self.setProperty("class", "image-box")
         main_layout = QVBoxLayout()
-        main_layout.setContentsMargins(4,4,4,4)
+        main_layout.setContentsMargins(0,0,0,0)
         main_layout.setSpacing(0)
         main_layout.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.setLayout(main_layout)
-
         self.main_widget = QStackedWidget(self)
+        # self.main_widget.setProperty("class", "image-box__container")
+        self.main_widget.setContentsMargins(0,0,0,0)
         main_layout.addWidget(self.main_widget, alignment=Qt.AlignmentFlag.AlignCenter)
+        self.resize(400, 200)
+        
 
     def set_images(self, urls):
         self.img_count = len(urls)
         self.urls = urls
         for url in self.urls:
-            img = Image(self)
-            img.set_image(url)
+            img = Image(url, self)
             self.main_widget.addWidget(img)
         self.main_widget.setCurrentIndex(0)
     
@@ -44,27 +47,18 @@ class ImageBox(QFrame):
         self.main_widget.setCurrentIndex(self.slide)
 
 class Image(QLabel):
-    def __init__(self, parent=None):
+    def __init__(self, url, parent=None):
         super().__init__(parent)
-        self.setProperty("class", "image")
-        main_layout = QVBoxLayout()
-        main_layout.setContentsMargins(0,0,0,0)
-        main_layout.setSpacing(0)
-        self.setLayout(main_layout)
-        self.url = None
-    
-    def set_image(self, url):
         self.url = url
-        label = QLabel(self)
-        pixmap = QPixmap(url)
-        pixmap = pixmap.scaled(
-            self.size(),
+        self.setProperty("class", "image")
+        self.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.pixmap = QPixmap(url)
+        self.pixmap = self.pixmap.scaled(
+            self.parent().size(),
             aspectRatioMode=Qt.AspectRatioMode.KeepAspectRatio,
             transformMode=Qt.TransformationMode.SmoothTransformation
         )
-        label.setPixmap(pixmap)
-        self.layout().setAlignment(Qt.AlignmentFlag.AlignCenter)
-        self.layout().addWidget(label)
+        self.setPixmap(self.pixmap)
 
     def getImage(self):
         return self.url
@@ -79,6 +73,31 @@ class Image(QLabel):
             subprocess.Popen(["open", url.parent])
         else:
             subprocess.Popen(["xdg-open", url.parent])
+
+# class Image(QLabel):
+#     def __init__(self, parent=None):
+#         super().__init__(parent)
+#         self.setProperty("class", "image")
+#         main_layout = QVBoxLayout()
+#         main_layout.setContentsMargins(0,0,0,0)
+#         main_layout.setSpacing(0)
+#         self.setLayout(main_layout)
+#         self.url = None
+    
+#     def set_image(self, url):
+#         self.url = url
+#         label = QLabel(self)
+#         pixmap = QPixmap(url)
+#         pixmap = pixmap.scaled(
+#             400, 200,
+#             aspectRatioMode=Qt.AspectRatioMode.KeepAspectRatio,
+#             transformMode=Qt.TransformationMode.SmoothTransformation
+#         )
+#         label.setPixmap(pixmap)
+#         self.layout().setAlignment(Qt.AlignmentFlag.AlignCenter)
+#         self.layout().addWidget(label)
+
+    
 
 if __name__ == "__main__":
     import sys

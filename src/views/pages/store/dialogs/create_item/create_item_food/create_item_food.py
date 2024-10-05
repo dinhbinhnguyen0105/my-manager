@@ -13,6 +13,8 @@ class CreateItemFood(QFrame):
     def __init__(self, parent=None):
         super().__init__(parent)
         self.setProperty("class", "create-item food")
+        self.setProperty("user-data", "food")
+        self.setProperty("option-index", 2)
         self.setObjectName("food")
         main_layout = QVBoxLayout()
         main_layout.setContentsMargins(0,0,0,0)

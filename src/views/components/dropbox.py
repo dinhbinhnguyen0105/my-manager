@@ -9,6 +9,7 @@ class Dropbox(QLabel):
         super().__init__(parent)
         self.setAcceptDrops(True)
         self.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.setProperty("class", "dropbox")
         self.setObjectName('dropbox')
         self.setText("Drag and drop images here")
     

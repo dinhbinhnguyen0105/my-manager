@@ -1,9 +1,11 @@
 .dialog {
-
+    
 }
 .create-item {
+    min-width: 400px;
+    min-height: 700px;
 }
-.dialog__create-item__options {
+.create-item__options {
     margin-top: 8px;
 }
 .option {
@@ -19,11 +21,12 @@
     border: 1px solid rgb(0, 145, 255);
 }
 
-.create-item {
-
+.create-item__container {
+    margin-top: 8px;
 }
-.re {
-    background-color: #D4F1F4;
+.real-estate {
+    /* background-color: #D4F1F4; */
+    background-color: transparent;
 }
 .fashion {
     background-color: #75E6DA;
@@ -37,3 +40,28 @@
 .travel {
     background-color: #05445E;
 }
+
+.dropbox {
+    min-width: 400px;
+    min-height: 200px;
+    border: 2px dashed #808080;
+    border-radius: 4px;
+}
+/*
+.image-box {
+    min-width: 400px;
+    min-height: 200px;
+    border: 2px dashed #808080;
+    border-radius: 4px;
+    background-color: blue;
+}
+.image-box__container {
+    min-width: 400px;
+    min-height: 200px;
+}
+.image {
+    min-width: 400px;
+    min-height: 200px;
+    border: 4px solid black;
+}
+*/

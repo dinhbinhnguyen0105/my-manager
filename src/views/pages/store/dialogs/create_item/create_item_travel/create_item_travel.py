@@ -13,6 +13,8 @@ class CreateItemTravel(QFrame):
     def __init__(self, parent=None):
         super().__init__(parent)
         self.setProperty("class", "create-item travel")
+        self.setProperty("user-data", "travel")
+        self.setProperty("option-index", 3)
         self.setObjectName("travel")
         main_layout = QVBoxLayout()
         main_layout.setContentsMargins(0,0,0,0)

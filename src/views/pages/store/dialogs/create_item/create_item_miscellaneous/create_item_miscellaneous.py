@@ -13,6 +13,8 @@ class CreateItemMiscellaneous(QFrame):
     def __init__(self, parent=None):
         super().__init__(parent)
         self.setProperty("class", "create-item miscellaneous")
+        self.setProperty("user-data", "miscellaneous")
+        self.setProperty("option-index", 4)
         self.setObjectName("miscellaneous")
         main_layout = QVBoxLayout()
         main_layout.setContentsMargins(0,0,0,0)
