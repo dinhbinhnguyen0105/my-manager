@@ -2,7 +2,10 @@ def find_widgets_by_class(parent_widget, widget_object,class_name):
     results = []
     for widget in parent_widget.findChildren(widget_object):
         if widget.property("class") and class_name in widget.property("class"):
-            results.append(widget)
+            classes = widget.property("class").split(" ")
+            for _class in classes:
+                if _class == class_name:
+                    results.append(widget)
     return results
 
 def find_widget_by_id(parent_widget, widget_object, id):

@@ -1,5 +1,7 @@
 import os, sys
 from PyQt5.QtWidgets import QDialog, QVBoxLayout, QFrame
+from PyQt5.QtCore import Qt
+
 MY_DIR = os.path.abspath(os.path.join(__file__, os.path.pardir))
 MAIN_DIR = os.path.abspath(os.path.join(MY_DIR, os.path.pardir,os.path.pardir,os.path.pardir, os.path.pardir))
 
@@ -21,10 +23,10 @@ class CreateItem(QDialog):
         main_layout.setSpacing(0)
         self.setLayout(main_layout)
         self.resize(400, 700)
-        # main_layout.setAlignment(Qt.AlignTop)
+        main_layout.setAlignment(Qt.AlignTop)
 
         self.options_widget = CreateItem_Options(self)
-        self.options_widget.current_option_event.connect(lambda e: print(e))
+        self.options_widget.current_option_event.connect(self.handle_set_option_page)
         
         self.re_page_widget = CreateItemRe(self)
         self.re_page_widget.hide()
@@ -47,14 +49,23 @@ class CreateItem(QDialog):
 
     def handle_set_option_page(self, current_option):
         options_page_widgets = handle_widget.find_widgets_by_class(self, QFrame, "create-item")
-        # for options_page_widget in options_page_widgets:
-        #     if options_page_widget.propery == current_option:
+        for options_page_widget in options_page_widgets:
+            print(options_page_widget.property("class"))
+            for _class in options_page_widget.property("class").split(" "):
+                if _class in current_option:
 
-        if current_option == "option_re":
-            self.fashion_page_widget.show()
-        elif current_option == "option_travel":
-        elif current_option == "option_fashion":
-        elif current_option == "option_food":
+                    # data-user: bla bla
+            # if options_page_widget.property() == current_option:
+            #     print(options_page_widget)
+        
+
+        if current_option == "option_re": self.re_page_widget.show()
+        elif current_option == "option_travel": pass
+        elif current_option == "option_fashion": pass
+        elif current_option == "option_food": pass
+        elif current_option == "option_miscellaneous": pass
+
+        # Miscellaneous
 
 if __name__ == '__main__':
     from PyQt5.QtWidgets import QApplication

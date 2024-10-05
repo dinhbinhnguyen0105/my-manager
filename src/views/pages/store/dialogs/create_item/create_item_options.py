@@ -40,11 +40,17 @@ class CreateItem_Options(QFrame):
         option_travel_widget.setProperty("class", "option")
         option_travel_widget.setText("Travel")
         option_travel_widget.clicked.connect(lambda : self.handle_option_clicked(option_travel_widget))
+        option_miscellaneous_widget = QPushButton(self)
+        option_miscellaneous_widget.setObjectName("option_miscellaneous")
+        option_miscellaneous_widget.setProperty("class", "option")
+        option_miscellaneous_widget.setText("Miscellaneous")
+        option_miscellaneous_widget.clicked.connect(lambda : self.handle_option_clicked(option_miscellaneous_widget))
 
         main_layout.addWidget(option_re_widget)
         main_layout.addWidget(option_fashion_widget)
         main_layout.addWidget(option_food_widget)
         main_layout.addWidget(option_travel_widget)
+        main_layout.addWidget(option_miscellaneous_widget)
     
     def showEvent(self, a0: QShowEvent | None) -> None:
         self.current_option_event.emit(self.current_option)

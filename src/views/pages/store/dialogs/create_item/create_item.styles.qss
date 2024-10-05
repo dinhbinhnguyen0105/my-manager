@@ -2,10 +2,9 @@
 
 }
 .create-item {
-
 }
 .dialog__create-item__options {
-
+    margin-top: 8px;
 }
 .option {
     margin: 0 4px;
@@ -18,4 +17,23 @@
 .option.activated {
     color: blue;
     border: 1px solid rgb(0, 145, 255);
+}
+
+.create-item {
+
+}
+.re {
+    background-color: #D4F1F4;
+}
+.fashion {
+    background-color: #75E6DA;
+}
+.food {
+    background-color: #189AB4;
+}
+.miscellaneous {
+    background-color: #D4F1F4;
+}
+.travel {
+    background-color: #05445E;
 }
