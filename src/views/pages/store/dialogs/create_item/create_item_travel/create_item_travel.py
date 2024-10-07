@@ -12,7 +12,7 @@ class CreateItemTravel(QFrame):
     current_option_event = pyqtSignal(str)
     def __init__(self, parent=None):
         super().__init__(parent)
-        self.setProperty("class", "create-item travel")
+        self.setProperty("class", "content travel")
         self.setProperty("user-data", "travel")
         self.setProperty("option-index", 3)
         self.setObjectName("travel")

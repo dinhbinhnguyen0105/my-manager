@@ -16,10 +16,9 @@ class ImageBox(QFrame):
         main_layout.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.setLayout(main_layout)
         self.main_widget = QStackedWidget(self)
-        # self.main_widget.setProperty("class", "image-box__container")
         self.main_widget.setContentsMargins(0,0,0,0)
         main_layout.addWidget(self.main_widget, alignment=Qt.AlignmentFlag.AlignCenter)
-        self.resize(400, 200)
+        self.resize(self.parent().size())
         
 
     def set_images(self, urls):

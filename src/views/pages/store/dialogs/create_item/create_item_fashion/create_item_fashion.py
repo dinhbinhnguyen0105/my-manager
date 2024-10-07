@@ -12,7 +12,7 @@ class CreateItemFashion(QFrame):
     current_option_event = pyqtSignal(str)
     def __init__(self, parent=None):
         super().__init__(parent)
-        self.setProperty("class", "create-item fashion")
+        self.setProperty("class", "content fashion")
         self.setProperty("user-data", "fashion")
         self.setProperty("option-index", 1)
         self.setObjectName("fashion")

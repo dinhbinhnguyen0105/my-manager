@@ -24,10 +24,29 @@
 .create-item__container {
     margin-top: 8px;
 }
+
+/* real-estate css */
 .real-estate {
     /* background-color: #D4F1F4; */
     background-color: transparent;
 }
+.content__images {
+    padding: 0 4px;
+}
+.content__location {
+    margin: 4px 4px;
+}
+.content__type {
+    margin: 4px 4px;
+}
+.content__id {
+    margin: 4px 4px;
+    text-align: center;
+    color: rgb(0, 145, 255);
+    font-weight: bold;
+}
+
+
 .fashion {
     background-color: #75E6DA;
 }
@@ -47,21 +66,32 @@
     border: 2px dashed #808080;
     border-radius: 4px;
 }
-/*
-.image-box {
-    min-width: 400px;
-    min-height: 200px;
-    border: 2px dashed #808080;
+.label {
+    height: 14px;
+    margin-top: 12px;
+    font-size: 10px;
+    color: rgb(0, 145, 255);
+}
+.lineedit {
+    margin: 0 2px;
     border-radius: 4px;
-    background-color: blue;
+    height: 24px;
 }
-.image-box__container {
-    min-width: 400px;
-    min-height: 200px;
+.combobox {
+    margin: 0 2px;
+    border: 1px solid gray;
+    border-radius: 4px;
+    padding: 2px 18px 2px 2px;
+    min-width: 10em;
 }
-.image {
-    min-width: 400px;
-    min-height: 200px;
-    border: 4px solid black;
+
+.combobox:drop-down {
+    subcontrol-origin: padding;
+    subcontrol-position: top right;
+    width: 20px;
+    border-left-width: 1px;
+    border-left-color: darkgray;
+    border-left-style: solid;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
 }
-*/

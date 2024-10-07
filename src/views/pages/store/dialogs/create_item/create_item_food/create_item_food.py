@@ -12,7 +12,7 @@ class CreateItemFood(QFrame):
     current_option_event = pyqtSignal(str)
     def __init__(self, parent=None):
         super().__init__(parent)
-        self.setProperty("class", "create-item food")
+        self.setProperty("class", "content food")
         self.setProperty("user-data", "food")
         self.setProperty("option-index", 2)
         self.setObjectName("food")

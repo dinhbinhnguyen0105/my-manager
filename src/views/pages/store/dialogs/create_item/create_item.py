@@ -52,10 +52,11 @@ class CreateItem(QDialog):
 
     def handle_set_option_page(self, current_button_widget):
         current_option_index = current_button_widget.property("option-index")
-        options_page_widgets = handle_widget.find_widgets_by_class(self, QFrame, "create-item")
+        options_page_widgets = handle_widget.find_widgets_by_class(self, QFrame, "content")
         for options_page_widget in options_page_widgets:
             option_index = options_page_widget.property("option-index")
             if option_index == current_option_index: self.create_container_widget.setCurrentIndex(option_index)
+
 if __name__ == '__main__':
     from PyQt5.QtWidgets import QApplication
     app = QApplication([])

@@ -12,7 +12,7 @@ class CreateItemMiscellaneous(QFrame):
     current_option_event = pyqtSignal(str)
     def __init__(self, parent=None):
         super().__init__(parent)
-        self.setProperty("class", "create-item miscellaneous")
+        self.setProperty("class", "content miscellaneous")
         self.setProperty("user-data", "miscellaneous")
         self.setProperty("option-index", 4)
         self.setObjectName("miscellaneous")
