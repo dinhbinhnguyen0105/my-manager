@@ -5,7 +5,6 @@ from PyQt5.QtWidgets import QFrame, QHBoxLayout, QPushButton
 MY_DIR = os.path.abspath(os.path.join(__file__, os.path.pardir))
 MAIN_DIR = os.path.abspath(os.path.join(MY_DIR, os.path.pardir,os.path.pardir,os.path.pardir, os.path.pardir, os.path.pardir, os.path.pardir, ))
 sys.path.append(MAIN_DIR)
-from .images import Images
 from views.utils import handle_widget
 
 class Type(QFrame):
@@ -63,4 +62,6 @@ class Type(QFrame):
         self.setStyleSheet(self.parent().styleSheet())
 
     def get_value(self):
-        return self.current_type
+        return {
+            "type": self.current_type
+        }

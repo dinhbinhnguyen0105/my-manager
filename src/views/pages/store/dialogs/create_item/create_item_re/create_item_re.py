@@ -1,9 +1,12 @@
 import os, sys, datetime, random
 from PyQt5.QtCore import Qt, pyqtSignal
-from PyQt5.QtWidgets import QFrame, QLabel, QVBoxLayout
+from PyQt5.QtWidgets import QFrame, QLabel, QVBoxLayout, QScrollArea
 from .images import Images
 from .type import Type
 from .location import Location
+from .category import Category
+from .buildingline import Buildingline
+from .detail import Detail
 
 MY_DIR = os.path.abspath(os.path.join(__file__, os.path.pardir))
 MAIN_DIR = os.path.abspath(os.path.join(MY_DIR, os.path.pardir,os.path.pardir,os.path.pardir, os.path.pardir, os.path.pardir, os.path.pardir, ))
@@ -28,16 +31,35 @@ class CreateItemRe(QFrame):
 
         self.images_widget = Images(self)
         self.images_widget.resize(400, 200)
+
+        self.scroll_widget = QScrollArea(self)
+        scroll_layout = QVBoxLayout()
+        scroll_layout.setContentsMargins(0,0,0,0)
+        scroll_layout.setSpacing(0)
+        scroll_layout.setAlignment(Qt.AlignTop)
+        self.scroll_widget.setLayout(scroll_layout)
+
         self.location_widget = Location(self)
         self.type_widget = Type(self)
         self.type_widget.current_type_event.connect(self.handle_set_id)
+        self.type_widget.current_type_event.connect(self.handle_set_category_options)
         self.id_widget = QLabel(self)
         self.id_widget.setAlignment(Qt.AlignCenter)
         self.id_widget.setProperty("class", "content__id")
+        self.category_widget = Category(self)
+        self.buildingline_widget = Buildingline(self)
+        self.detail_widget = Detail(self)
+
         main_layout.addWidget(self.images_widget)
-        main_layout.addWidget(self.location_widget)
-        main_layout.addWidget(self.type_widget)
-        main_layout.addWidget(self.id_widget)
+        scroll_layout.addWidget(self.id_widget)
+        scroll_layout.addWidget(self.location_widget)
+        scroll_layout.addWidget(self.type_widget)
+        scroll_layout.addWidget(self.category_widget)
+        scroll_layout.addWidget(self.buildingline_widget)
+        scroll_layout.addWidget(self.detail_widget)
+        
+        main_layout.addWidget(self.scroll_widget)
+
         main_layout.addWidget(QLabel("RE"))
         
 
@@ -47,5 +69,7 @@ class CreateItemRe(QFrame):
         randint = random.randint(0, 100)
         self.product_id = f"RE.{current_type}.{now.strftime('%m')}{now.strftime('%d')}{now.strftime('%y')}.{int(now.strftime('%S'))* randint}"
         self.id_widget.setText(self.product_id)
-
+    
+    def handle_set_category_options(self, current_type_widget):
+        self.category_widget.set_categories(current_type_widget.property("user-data"))
 # option_type_date

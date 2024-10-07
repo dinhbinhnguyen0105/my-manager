@@ -45,6 +45,15 @@
     color: rgb(0, 145, 255);
     font-weight: bold;
 }
+.content__category {
+    margin: 4px 4px;
+}
+.content__buildingline {
+    margin: 4px 4px;
+}
+.content__detail {
+    margin: 4px 4px;
+}
 
 
 .fashion {

@@ -1,12 +1,11 @@
 import os, sys
-from PyQt5.QtCore import Qt, pyqtSignal
-from PyQt5.QtGui import QShowEvent
-from PyQt5.QtWidgets import QFrame, QHBoxLayout, QGridLayout, QVBoxLayout, QPushButton, QComboBox, QLabel, QLineEdit
+from PyQt5.QtWidgets import QFrame, QGridLayout
 MY_DIR = os.path.abspath(os.path.join(__file__, os.path.pardir))
 MAIN_DIR = os.path.abspath(os.path.join(MY_DIR, os.path.pardir,os.path.pardir,os.path.pardir, os.path.pardir, os.path.pardir, os.path.pardir, ))
 sys.path.append(MAIN_DIR)
-from .images import Images
-from views.utils import handle_widget
+
+from views.components.combobox import Combobox
+from views.components.lineedit import LineEdit
 
 PROVIDE_OPTIONS = [("Lâm Đồng", "lamdong")]
 DISTRICT_OPTIONS = [("Đà Lạt", "dalat"), ("Đức Trọng", "ductrong")]
@@ -79,79 +78,11 @@ class Location(QFrame):
                 self.ward_widget.combobox_widget.addItem(ward_option[0], ward_option[1])
         elif district == "ductrong":
             self.ward_widget.remove_items()
-
-class LineEdit(QFrame):
-    current_text_event = pyqtSignal(str)
-    def __init__(self, payload, parent=None):
-        super().__init__(parent)
-        if "class" in payload.keys(): self._class = payload["class"]
-        else: self._class = None
-        if "label" in payload.keys(): self._label = payload["label"]
-        else: self._label = "undefined"
-        
-        self.setProperty("class", self._class)
-        main_layout = QVBoxLayout()
-        main_layout.setContentsMargins(0,0,0,0)
-        main_layout.setSpacing(0)
-        self.setLayout(main_layout)
-
-        label_widget = QLabel(self._label, self)
-        label_widget.setProperty("class", "label")
-        self.lineedit_widget = QLineEdit(self)
-        self.lineedit_widget.setProperty("class", "lineedit")
-        self.lineedit_widget.textChanged.connect(self.handle_lineedit_changed)
-    
-        main_layout.addWidget(label_widget)
-        main_layout.addWidget(self.lineedit_widget)
-
-    def handle_lineedit_changed(self, e):
-        # for Hint
-        pass
     
     def get_value(self):
-        current_text = self.lineedit_widget.text().lower()
-        return current_text
-
-class Combobox(QFrame):
-    current_option_event = pyqtSignal(str)
-    def __init__(self, payload, parent=None):
-        super().__init__(parent)
-        if "class" in payload.keys(): self._class = payload["class"]
-        else: self._class = None
-        if "label" in payload.keys(): self._label = payload["label"]
-        else: self._label = "undefined"
-        if "options" in payload.keys(): self._options = payload["options"]
-        else: self._options = []
-
-        self.setProperty("class", self._class)
-        main_layout = QVBoxLayout()
-        main_layout.setContentsMargins(0,0,0,0)
-        main_layout.setSpacing(0)
-        self.setLayout(main_layout)
-
-        label_widget = QLabel(self._label, self)
-        label_widget.setProperty("class", "label")
-        self.combobox_widget = QComboBox(self)
-        self.combobox_widget.setProperty("class", "combobox")
-        for _option in self._options:
-            self.combobox_widget.addItem(_option[0], _option[1])
-        self.combobox_widget.currentIndexChanged.connect(self.handle_index_changed)
-        
-        main_layout.addWidget(label_widget)
-        main_layout.addWidget(self.combobox_widget)
-    
-    def handle_index_changed(self):
-        current_data_user = self.combobox_widget.currentData()
-        self.current_option_event.emit(current_data_user)
-    
-    def remove_items(self):
-        while self.combobox_widget.count() > 0:
-            self.combobox_widget.removeItem(0)
-    
-    def showEvent(self, a0: QShowEvent | None) -> None:
-        self.handle_index_changed()
-        return super().showEvent(a0)
-    
-    def get_value(self):
-        return self.combobox_widget.currentData()
-    
+        return {
+            "provide": self.provide_widget.get_value(),
+            "district": self.district_widget.get_value(),
+            "ward": self.ward_widget.get_value(),
+            "street": self.street_widget.get_value(),
+        }
