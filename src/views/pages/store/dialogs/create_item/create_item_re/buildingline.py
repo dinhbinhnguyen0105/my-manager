@@ -54,4 +54,4 @@ class Buildingline(QFrame):
         self.setStyleSheet(self.parent().styleSheet())
 
     def get_value(self):
-        return { "building_line": self.current_buildingline }
+        return { "building_line": self.current_buildingline.property("user-data") }

@@ -1,5 +1,5 @@
 import os, sys
-from PyQt5.QtWidgets import QDialog, QVBoxLayout, QFrame, QStackedWidget
+from PyQt5.QtWidgets import QDialog, QVBoxLayout, QFrame, QStackedWidget, QPushButton
 from PyQt5.QtCore import Qt
 
 MY_DIR = os.path.abspath(os.path.join(__file__, os.path.pardir))
@@ -33,6 +33,10 @@ class CreateItem(QDialog):
         self.food_page_widget = CreateItemFood(self)
         self.travel_page_widget = CreateItemTravel(self)
         self.miscellaneous_page_widget = CreateItemMiscellaneous(self)
+
+        self.savebutton_widget = QPushButton("Save", self)
+        self.savebutton_widget.setProperty("class", "content__save-btn")
+        self.savebutton_widget.clicked.connect(self.handle_clicked)
         
         self.create_container_widget = QStackedWidget(self)
         self.create_container_widget.setProperty("class", "create-item__container")
@@ -43,8 +47,8 @@ class CreateItem(QDialog):
         self.create_container_widget.addWidget(self.miscellaneous_page_widget)
 
         main_layout.addWidget(self.options_widget)
-
         main_layout.addWidget(self.create_container_widget)
+        main_layout.addWidget(self.savebutton_widget)
 
         with open(os.path.join(MY_DIR, "create_item.styles.qss"), "r") as f:
             self.my_styles = f.read()
@@ -56,6 +60,9 @@ class CreateItem(QDialog):
         for options_page_widget in options_page_widgets:
             option_index = options_page_widget.property("option-index")
             if option_index == current_option_index: self.create_container_widget.setCurrentIndex(option_index)
+    
+    def handle_clicked(self):
+        print(self.re_page_widget.get_value())
 
 if __name__ == '__main__':
     from PyQt5.QtWidgets import QApplication

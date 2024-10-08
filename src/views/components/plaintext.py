@@ -26,7 +26,7 @@ class Plaintext(QFrame):
         main_layout.addWidget(self.plaintext_widget)
 
     def handle_text_changed(self, e):
-        print(e)
+        # print(e)
         pass
     
     def get_value(self):

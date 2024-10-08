@@ -12,6 +12,7 @@ MY_DIR = os.path.abspath(os.path.join(__file__, os.path.pardir))
 MAIN_DIR = os.path.abspath(os.path.join(MY_DIR, os.path.pardir,os.path.pardir,os.path.pardir, os.path.pardir, os.path.pardir, os.path.pardir, ))
 sys.path.append(MAIN_DIR)
 from views.utils import handle_widget
+from views.components.plaintext import Plaintext
 
 class CreateItemRe(QFrame):
     current_option_event = pyqtSignal(str)
@@ -55,11 +56,10 @@ class CreateItemRe(QFrame):
         self.category_widget = Category(self)
         self.buildingline_widget = Buildingline(self)
         self.detail_widget = Detail(self)
-        self.description_widget = QPlainTextEdit(self)
-        self.description_widget.setProperty("class", "content__description")
-        self.savebutton_widget = QPushButton("Save", self)
-        self.savebutton_widget.setProperty("class", "content__save-btn")
-        self.savebutton_widget.clicked.connect(self.handle_clicked)
+        self.description_widget = Plaintext({
+            "class": "content__description",
+            "label": "Description: "
+        }, self)
 
         main_layout.addWidget(self.images_widget) 
         scroll_layout.addWidget(self.id_widget)
@@ -72,14 +72,20 @@ class CreateItemRe(QFrame):
         self.scroll_area.setWidget(self.scroll_widget)
         
         main_layout.addWidget(self.scroll_area)
-        main_layout.addWidget(self.savebutton_widget)
-    
-    def handle_clicked(self):
-        self.detail_widget.get_value()
     
     def get_value(self):
-
-        pass
+        values = {
+            **self.images_widget.get_value(),
+            **{ "id" : self.id_widget.text(), },
+            **self.location_widget.get_value(),
+            **self.type_widget.get_value(), 
+            **self.category_widget.get_value(), 
+            **self.buildingline_widget.get_value(), 
+            **self.detail_widget.get_value(), 
+            **{ "description" : self.description_widget.get_value(), },
+        }
+        if values["images"] == []: values
+        # return _
 
     def handle_set_id(self, current_type_widget):
         current_type = current_type_widget.property("user-data")[0].upper()

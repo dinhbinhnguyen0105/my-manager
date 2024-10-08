@@ -43,5 +43,5 @@ class Combobox(QFrame):
         return super().showEvent(a0)
     
     def get_value(self):
-        return self.combobox_widget.currentData(self.combobox_widget.currentIndex()).lower()
+        return self.combobox_widget.currentData(self.combobox_widget.currentIndex())
     

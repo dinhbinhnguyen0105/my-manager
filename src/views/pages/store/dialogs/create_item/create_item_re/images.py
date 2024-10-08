@@ -15,7 +15,7 @@ class Images(QFrame):
         main_layout.setSpacing(0)
         main_layout.setAlignment(Qt.AlignTop)
         self.setLayout(main_layout)
-
+        self.img_box = None
         self.drop_widget = dropbox.Dropbox(self)
         self.drop_widget.e_dropped_urls.connect(self.handle_dropped_imgs)
 
@@ -26,3 +26,7 @@ class Images(QFrame):
         self.img_box = imagebox.ImageBox(self)
         self.img_box.set_images(e)
         self.layout().addWidget(self.img_box)
+    
+    def get_value(self):
+        if self.img_box: return { "images": self.img_box.urls }
+        return { "images" : []}

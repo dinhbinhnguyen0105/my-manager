@@ -64,18 +64,17 @@ class Detail(QFrame):
         main_layout.addWidget(self.price_widget, 2, 1, 1, 1)
     
     def get_value(self):
-        pattern = r"\d+(\.\d+)?"
-        price = re.findall(pattern, self.price_widget.get_value())
-        print(price)
-        area = re.findall(pattern, self.area_widget.get_value())
-        print(area)
-        return
+        pattern = r"^[0-9.]+$"
+        if re.match(pattern, self.price_widget.get_value()): price = float(pattern, self.price_widget.get_value())
+        else: price = False
+        if re.match(pattern, self.area_widget.get_value()): area = float(pattern, self.area_widget.get_value())
+        else: area = False
         return {
-            "area": float(area),
+            "area": area,
             "construction": self.construction_widget.get_value(),
             "function": self.function_widget.get_value(),
             "furniture": self.furniture_widget.get_value(),
             "legal": self.legal_widget.get_value(),
-            "price ": float(price),
+            "price ": price,
         }
     

@@ -30,5 +30,5 @@ class LineEdit(QFrame):
         pass
     
     def get_value(self):
-        current_text = self.lineedit_widget.text().lower()
+        current_text = self.lineedit_widget.text()
         return current_text
