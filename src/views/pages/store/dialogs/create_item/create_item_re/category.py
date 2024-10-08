@@ -1,5 +1,6 @@
 import os, sys
 from PyQt5.QtCore import pyqtSignal
+from PyQt5.QtGui import QShowEvent
 from PyQt5.QtWidgets import QFrame, QHBoxLayout, QPushButton
 MY_DIR = os.path.abspath(os.path.join(__file__, os.path.pardir))
 MAIN_DIR = os.path.abspath(os.path.join(MY_DIR, os.path.pardir,os.path.pardir,os.path.pardir, os.path.pardir, os.path.pardir, os.path.pardir, ))
@@ -7,7 +8,7 @@ sys.path.append(MAIN_DIR)
 from views.components.combobox import Combobox
 
 class Category(QFrame):
-    current_category_event = pyqtSignal(QPushButton)
+    current_category_event = pyqtSignal(str)
     def __init__(self, parent=None):
         super().__init__(parent)
         self.setProperty("class", "content__category")
@@ -21,6 +22,7 @@ class Category(QFrame):
             "label": "Category: ",
             "options": []
         }, self)
+        self.category_widget.current_option_event.connect(lambda e: self.current_category_event.emit(e))
         main_layout.addWidget(self.category_widget)
     
     def set_categories(self, product_type):
@@ -61,6 +63,8 @@ class Category(QFrame):
         for category in categories:
             self.category_widget.combobox_widget.addItem(category[0], category[1])
 
+       
+    
     def get_value(self):
         return {
             "category": self.category_widget.get_value()

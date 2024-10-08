@@ -16,13 +16,13 @@ class LineEdit(QFrame):
         main_layout.setSpacing(0)
         self.setLayout(main_layout)
 
-        label_widget = QLabel(self._label, self)
-        label_widget.setProperty("class", "label")
+        self.label_widget = QLabel(self._label, self)
+        self.label_widget.setProperty("class", "label")
         self.lineedit_widget = QLineEdit(self)
         self.lineedit_widget.setProperty("class", "lineedit")
         self.lineedit_widget.textChanged.connect(self.handle_lineedit_changed)
     
-        main_layout.addWidget(label_widget)
+        main_layout.addWidget(self.label_widget)
         main_layout.addWidget(self.lineedit_widget)
 
     def handle_lineedit_changed(self, e):

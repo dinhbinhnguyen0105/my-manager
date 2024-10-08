@@ -51,7 +51,7 @@
 .content__buildingline {
     margin: 4px 4px;
 }
-.content__detail {
+.content__details {
     margin: 4px 4px;
 }
 .content__description {

@@ -11,26 +11,26 @@ from views.components.lineedit import LineEdit
 class Detail(QFrame):
     def __init__(self, parent=None):
         super().__init__(parent)
-        self.setProperty("class", "content__detail")
+        self.setProperty("class", "content__details")
         main_layout = QGridLayout()
         main_layout.setContentsMargins(0,0,0,0)
         main_layout.setSpacing(0)
         self.setLayout(main_layout)
 
         self.area_widget = LineEdit({
-            "class": "content__detail__area",
+            "class": "content__detail content__detail__area",
             "label": "Area: ",
         }, self)
         self.construction_widget = LineEdit({
-            "class": "content__detail__construction",
+            "class": "content__detail content__detail__construction",
             "label": "Construction: ",
         }, self)
         self.function_widget = LineEdit({
-            "class": "content__detail__function",
+            "class": "content__detail content__detail__function",
             "label": "Function: ",
         }, self)
         self.furniture_widget = Combobox({
-            "class": "content__location__furniture",
+            "class": "content__detail content__detail__furniture",
             "label": "Furniture: ",
             "options": [
                 ("None", "none"),
@@ -39,7 +39,7 @@ class Detail(QFrame):
             ]
         }, self)
         self.legal_widget = Combobox({
-            "class": "content__location__legal",
+            "class": "content__detail content__detail__legal",
             "label": "Legal: ",
             "options": [
                 ("Không sổ", "none"),
@@ -52,7 +52,7 @@ class Detail(QFrame):
             ]
         }, self)
         self.price_widget = LineEdit({
-            "class": "content__detail__price",
+            "class": "content__detail content__detail__price",
             "label": "Price: ",
         }, self)
 
@@ -65,9 +65,9 @@ class Detail(QFrame):
     
     def get_value(self):
         pattern = r"^[0-9.]+$"
-        if re.match(pattern, self.price_widget.get_value()): price = float(pattern, self.price_widget.get_value())
+        if re.match(pattern, self.price_widget.get_value()): price = float(self.price_widget.get_value())
         else: price = False
-        if re.match(pattern, self.area_widget.get_value()): area = float(pattern, self.area_widget.get_value())
+        if re.match(pattern, self.area_widget.get_value()): area = float(self.area_widget.get_value())
         else: area = False
         return {
             "area": area,
