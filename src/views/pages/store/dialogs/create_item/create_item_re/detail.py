@@ -1,4 +1,4 @@
-import os, sys
+import os, sys, re
 from PyQt5.QtCore import pyqtSignal
 from PyQt5.QtWidgets import QFrame, QGridLayout
 MY_DIR = os.path.abspath(os.path.join(__file__, os.path.pardir))
@@ -62,3 +62,20 @@ class Detail(QFrame):
         main_layout.addWidget(self.furniture_widget, 1, 1, 1, 1)
         main_layout.addWidget(self.legal_widget, 2, 0, 1, 1)
         main_layout.addWidget(self.price_widget, 2, 1, 1, 1)
+    
+    def get_value(self):
+        pattern = r"\d+(\.\d+)?"
+        price = re.findall(pattern, self.price_widget.get_value())
+        print(price)
+        area = re.findall(pattern, self.area_widget.get_value())
+        print(area)
+        return
+        return {
+            "area": float(area),
+            "construction": self.construction_widget.get_value(),
+            "function": self.function_widget.get_value(),
+            "furniture": self.furniture_widget.get_value(),
+            "legal": self.legal_widget.get_value(),
+            "price ": float(price),
+        }
+    

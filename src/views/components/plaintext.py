@@ -1,7 +1,7 @@
 from PyQt5.QtCore import pyqtSignal
-from PyQt5.QtWidgets import QFrame,  QVBoxLayout, QLabel, QLineEdit
+from PyQt5.QtWidgets import QFrame,  QVBoxLayout, QLabel, QPlainTextEdit
 
-class LineEdit(QFrame):
+class Plaintext(QFrame):
     current_text_event = pyqtSignal(str)
     def __init__(self, payload, parent=None):
         super().__init__(parent)
@@ -18,17 +18,17 @@ class LineEdit(QFrame):
 
         label_widget = QLabel(self._label, self)
         label_widget.setProperty("class", "label")
-        self.lineedit_widget = QLineEdit(self)
-        self.lineedit_widget.setProperty("class", "lineedit")
-        self.lineedit_widget.textChanged.connect(self.handle_lineedit_changed)
+        self.plaintext_widget = QPlainTextEdit(self)
+        self.plaintext_widget.setProperty("class", "plaintext")
+        self.plaintext_widget.textChanged.connect(self.handle_text_changed)
     
         main_layout.addWidget(label_widget)
-        main_layout.addWidget(self.lineedit_widget)
+        main_layout.addWidget(self.plaintext_widget)
 
-    def handle_lineedit_changed(self, e):
-        # for Hint
+    def handle_text_changed(self, e):
+        print(e)
         pass
     
     def get_value(self):
-        current_text = self.lineedit_widget.text().lower()
+        current_text = self.plaintext_widget.toPlainText().lower()
         return current_text

@@ -1,10 +1,6 @@
-import os, sys
 from PyQt5.QtCore import pyqtSignal
 from PyQt5.QtGui import QShowEvent
 from PyQt5.QtWidgets import QFrame, QVBoxLayout, QComboBox, QLabel
-# MY_DIR = os.path.abspath(os.path.join(__file__, os.path.pardir))
-# MAIN_DIR = os.path.abspath(os.path.join(MY_DIR, os.path.pardir,os.path.pardir,os.path.pardir, os.path.pardir, os.path.pardir, os.path.pardir, ))
-# sys.path.append(MAIN_DIR)
 
 class Combobox(QFrame):
     current_option_event = pyqtSignal(str)
@@ -47,5 +43,5 @@ class Combobox(QFrame):
         return super().showEvent(a0)
     
     def get_value(self):
-        return self.combobox_widget.currentData()
+        return self.combobox_widget.currentData(self.combobox_widget.currentIndex()).lower()
     

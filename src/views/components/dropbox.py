@@ -1,4 +1,4 @@
-import os, sys, platform, subprocess
+import sys
 from PyQt5.QtWidgets import QVBoxLayout,QLabel,QFrame,QStackedWidget
 from PyQt5.QtCore import Qt, pyqtSignal, QSize
 from PyQt5.QtGui import QDragEnterEvent, QDragMoveEvent, QDropEvent, QPixmap, QWheelEvent, QMouseEvent

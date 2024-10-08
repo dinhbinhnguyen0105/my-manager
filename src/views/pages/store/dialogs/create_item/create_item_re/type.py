@@ -63,5 +63,5 @@ class Type(QFrame):
 
     def get_value(self):
         return {
-            "type": self.current_type
+            "type": self.current_type.property("user-data")
         }
