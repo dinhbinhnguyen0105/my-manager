@@ -13,6 +13,7 @@ from create_item_travel.create_item_travel import CreateItemTravel
 from create_item_miscellaneous.create_item_miscellaneous import CreateItemMiscellaneous
 sys.path.append(MAIN_DIR)
 from views.utils import handle_widget
+from logic.db.local.products import info_write
 
 class CreateItem(QDialog):
     def __init__(self, parent=None):
@@ -62,7 +63,20 @@ class CreateItem(QDialog):
             if option_index == current_option_index: self.create_container_widget.setCurrentIndex(option_index)
     
     def handle_clicked(self):
-        print(self.re_page_widget.get_value())
+        current_option = self.options_widget.get_value()
+        if current_option["option"] == "real-estate":
+            _ = {**current_option, **self.re_page_widget.get_value()}
+            write_result = info_write(_)
+            return write_result
+        elif current_option["option"] == "fashion": pass
+        elif current_option["option"] == "food": pass
+        elif current_option["option"] == "travel": pass
+        elif current_option["option"] == "miscellaneous":
+            _ = { **current_option, **self.miscellaneous_page_widget.get_value()}
+            write_result = info_write(_)
+            print(write_result)
+            return write_result
+        self.close()
 
 if __name__ == '__main__':
     from PyQt5.QtWidgets import QApplication

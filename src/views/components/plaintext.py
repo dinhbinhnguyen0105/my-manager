@@ -1,4 +1,4 @@
-from PyQt5.QtCore import pyqtSignal
+from PyQt5.QtCore import pyqtSignal, Qt
 from PyQt5.QtWidgets import QFrame,  QVBoxLayout, QLabel, QPlainTextEdit
 
 class Plaintext(QFrame):
@@ -20,14 +20,20 @@ class Plaintext(QFrame):
         label_widget.setProperty("class", "label")
         self.plaintext_widget = QPlainTextEdit(self)
         self.plaintext_widget.setProperty("class", "plaintext")
-        self.plaintext_widget.textChanged.connect(self.handle_text_changed)
+        # self.plaintext_widget.showEvent = self.handle_plaintext_show
+        # self.plaintext_widget.textChanged.connect(self.handle_text_changed)
     
         main_layout.addWidget(label_widget)
         main_layout.addWidget(self.plaintext_widget)
+    
+    # def handle_plaintext_show(self, e):
+    #     if self.plaintext_widget.toPlainText() == "":
+    #         self.plaintext_widget.textCursor().insertText("'\n+ ")
 
-    def handle_text_changed(self, e):
-        # print(e)
-        pass
+    # def handle_text_changed(self):
+    #     current_text = self.plaintext_widget.toPlainText()
+    #     if current_text and current_text[-1] == "\n":
+    #         self.plaintext_widget.textCursor().insertText("+ ")
     
     def get_value(self):
         current_text = self.plaintext_widget.toPlainText().lower()

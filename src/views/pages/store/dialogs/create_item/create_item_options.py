@@ -80,7 +80,7 @@ class CreateItem_Options(QFrame):
         self.current_option_event.emit(self.current_option)
         self.setStyleSheet(self.parent().styleSheet())
 
-    # def get_value(self):
-    #     return {
-    #         "option": self.category_widget.get_value()
-    #     }
+    def get_value(self):
+        return {
+            "option": self.current_option.property("user-data")
+        }

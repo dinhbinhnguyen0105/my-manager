@@ -1,0 +1,35 @@
+{
+    "rent": [],
+    "sell": [
+        {
+            "option": "real-estate",
+            "images": {
+                "data": [
+                    "/Users/dinhbinh/Dev/my-manager/my-manager/bin/db/real-estate/images/re.s.100924.5244/re.s.100924.5244_0.png",
+                    "/Users/dinhbinh/Dev/my-manager/my-manager/bin/db/real-estate/images/re.s.100924.5244/re.s.100924.5244_1.png",
+                    "/Users/dinhbinh/Dev/my-manager/my-manager/bin/db/real-estate/images/re.s.100924.5244/re.s.100924.5244_2.png",
+                    "/Users/dinhbinh/Dev/my-manager/my-manager/bin/db/real-estate/images/re.s.100924.5244/re.s.100924.5244_3.png",
+                    "/Users/dinhbinh/Dev/my-manager/my-manager/bin/db/real-estate/images/re.s.100924.5244/re.s.100924.5244_4.png",
+                    "/Users/dinhbinh/Dev/my-manager/my-manager/bin/db/real-estate/images/re.s.100924.5244/re.s.100924.5244_5.png"
+                ],
+                "message": "successfully"
+            },
+            "id": "re.s.100924.5244",
+            "provide": "l\u00e2m \u0111\u1ed3ng",
+            "district": "\u0111\u00e0 l\u1ea1t",
+            "ward": "ward_10",
+            "street": "ph\u1ea1m h\u1ed3ng th\u00e1i",
+            "type": "sell",
+            "category": "house",
+            "building_line": "card",
+            "area": 87.75,
+            "construction": "1 h\u1ea7m, 1 tr\u1ec7t, 3 l\u1ea7u",
+            "function": "1pk, 1 b\u1ebfp, 5pn, 6wc",
+            "furniture": "full",
+            "legal": "srxd",
+            "price ": 14.5,
+            "description": "'\n+ nh\u00e0 m\u1edbi, s\u1ea1ch s\u1ebd, g\u1ecdn g\u00e0ng, c\u00f3 h\u1ed3 b\u01a1i\n+ ngang 4.5m\n+ kqh b\u00e0i b\u1ea3n, \u0111\u01b0\u1eddng xe h\u01a1i r\u1ed9ng r\u00e3i\n+ t\u1eb7ng to\u00e0n b\u1ed9 \u0111\u00e1 phong thu\u1ef7 cho ch\u1ee7 m\u1edbi \u1ea1; khu v\u1ef1c y\u00ean t\u0129nh th\u00edch h\u1ee3p ngh\u1ec9 d\u01b0\u1ee1ng"
+        }
+    ],
+    "assignment": []
+}

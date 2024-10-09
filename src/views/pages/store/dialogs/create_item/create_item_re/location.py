@@ -52,7 +52,6 @@ class Location(QFrame):
             "class": "content__location__ward",
             "label": "Ward: ",
         }, self)
-
         self.street_widget = LineEdit({
             "class": "content__location__street",
             "label": "Street: "

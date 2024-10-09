@@ -1,6 +1,6 @@
 import os, sys, datetime, random
 from PyQt5.QtCore import Qt, pyqtSignal
-from PyQt5.QtWidgets import QFrame, QLabel, QVBoxLayout, QScrollArea, QPlainTextEdit, QSizePolicy, QPushButton
+from PyQt5.QtWidgets import QFrame, QLabel, QVBoxLayout, QScrollArea, QSizePolicy
 from .images import Images
 from .type import Type
 from .location import Location
@@ -13,8 +13,6 @@ MAIN_DIR = os.path.abspath(os.path.join(MY_DIR, os.path.pardir,os.path.pardir,os
 sys.path.append(MAIN_DIR)
 from views.utils import handle_widget
 from views.components.plaintext import Plaintext
-from views.components.lineedit import LineEdit
-from views.components.combobox import Combobox
 
 class CreateItemRe(QFrame):
     current_option_event = pyqtSignal(str)
@@ -88,11 +86,16 @@ class CreateItemRe(QFrame):
             **self.detail_widget.get_value(), 
             **{ "description" : self.description_widget.get_value(), },
         }
+
+        for key in values.keys():
+            if type(values[key]) == str: values[key] = values[key].lower()
+
         if "images" in values.keys() and values["images"] == []: values["images"] = False
         if "street" in values.keys() and not values["street"]: values["street"] = False
         if "construction" in values.keys() and not values["construction"]: values["construction"] = False
         if "function" in values.keys() and not values["function"]: values["function"] = False
         if "furniture" in values.keys() and not values["furniture"]: values["furniture"] = False
+        if "type" in values.keys() and (values["type"] == "rent" or values["type"] == "assignment"): values["legal"] = False
         return values
 
     def handle_set_id(self, current_type_widget):
@@ -104,6 +107,7 @@ class CreateItemRe(QFrame):
     
     def handle_set_category_options(self, current_type_widget):
         self.category_widget.set_categories(current_type_widget.property("user-data"))
+
     def handle_set_detail_deps_type(self, current_type):
         if current_type.property("user-data") == "sell":
             for content_detail_widget in handle_widget.find_widgets_by_class(self.detail_widget, QFrame, "content__detail"):
@@ -121,5 +125,21 @@ class CreateItemRe(QFrame):
             self.detail_widget.area_widget.setDisabled(True)
             self.detail_widget.legal_widget.setDisabled(True)
 
-    def handle_set_detail_deps_category(self, current_category): 
-        print("current_category: ", current_category)
+    def handle_set_detail_deps_category(self, current_category):
+        if current_category == "category_apartment" or\
+            current_category == "category_land" or\
+            current_category == "category_retailspace" or\
+            current_category == "category_workshop":
+            self.detail_widget.construction_widget.lineedit_widget.setText("0")
+            self.detail_widget.construction_widget.setDisabled(True)
+        else:
+            self.detail_widget.construction_widget.lineedit_widget.setText("")
+            self.detail_widget.construction_widget.setDisabled(False)
+        if current_category == "category_land":
+            self.detail_widget.function_widget.lineedit_widget.setText("0")
+            self.detail_widget.function_widget.setDisabled(True)
+            self.detail_widget.furniture_widget.setDisabled(True)
+        else:
+            self.detail_widget.function_widget.lineedit_widget.setText("")
+            self.detail_widget.function_widget.setDisabled(False)
+            self.detail_widget.furniture_widget.setDisabled(False)

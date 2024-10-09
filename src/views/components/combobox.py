@@ -30,6 +30,10 @@ class Combobox(QFrame):
         main_layout.addWidget(label_widget)
         main_layout.addWidget(self.combobox_widget)
     
+    def showEvent(self, a0: QShowEvent | None) -> None:
+        self.current_option_event.emit(self.combobox_widget.currentData())
+        return super().showEvent(a0)
+    
     def handle_index_changed(self, e):
         current_data_user = self.combobox_widget.currentData()
         self.current_option_event.emit(current_data_user)
@@ -39,5 +43,5 @@ class Combobox(QFrame):
             self.combobox_widget.removeItem(0)
     
     def get_value(self):
-        return self.combobox_widget.currentData(self.combobox_widget.currentIndex())
+        return self.combobox_widget.currentData()
     

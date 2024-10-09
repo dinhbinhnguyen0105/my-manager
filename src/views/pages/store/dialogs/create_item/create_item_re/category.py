@@ -59,12 +59,9 @@ class Category(QFrame):
                 ("Coffee house", "category_coffeehouse"),
             ]
         else: categories = []
-
         for category in categories:
             self.category_widget.combobox_widget.addItem(category[0], category[1])
 
-       
-    
     def get_value(self):
         return {
             "category": self.category_widget.get_value()
