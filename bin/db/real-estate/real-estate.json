@@ -3,17 +3,14 @@
     "sell": [
         {
             "option": "real-estate",
-            "images": {
-                "data": [
-                    "/Users/dinhbinh/Dev/my-manager/my-manager/bin/db/real-estate/images/re.s.100924.5244/re.s.100924.5244_0.png",
-                    "/Users/dinhbinh/Dev/my-manager/my-manager/bin/db/real-estate/images/re.s.100924.5244/re.s.100924.5244_1.png",
-                    "/Users/dinhbinh/Dev/my-manager/my-manager/bin/db/real-estate/images/re.s.100924.5244/re.s.100924.5244_2.png",
-                    "/Users/dinhbinh/Dev/my-manager/my-manager/bin/db/real-estate/images/re.s.100924.5244/re.s.100924.5244_3.png",
-                    "/Users/dinhbinh/Dev/my-manager/my-manager/bin/db/real-estate/images/re.s.100924.5244/re.s.100924.5244_4.png",
-                    "/Users/dinhbinh/Dev/my-manager/my-manager/bin/db/real-estate/images/re.s.100924.5244/re.s.100924.5244_5.png"
-                ],
-                "message": "successfully"
-            },
+            "images": [
+                "/Users/dinhbinh/Dev/my-manager/my-manager/bin/db/real-estate/images/re.s.100924.5244/re.s.100924.5244_0.png",
+                "/Users/dinhbinh/Dev/my-manager/my-manager/bin/db/real-estate/images/re.s.100924.5244/re.s.100924.5244_1.png",
+                "/Users/dinhbinh/Dev/my-manager/my-manager/bin/db/real-estate/images/re.s.100924.5244/re.s.100924.5244_2.png",
+                "/Users/dinhbinh/Dev/my-manager/my-manager/bin/db/real-estate/images/re.s.100924.5244/re.s.100924.5244_3.png",
+                "/Users/dinhbinh/Dev/my-manager/my-manager/bin/db/real-estate/images/re.s.100924.5244/re.s.100924.5244_4.png",
+                "/Users/dinhbinh/Dev/my-manager/my-manager/bin/db/real-estate/images/re.s.100924.5244/re.s.100924.5244_5.png"
+            ],
             "id": "re.s.100924.5244",
             "provide": "l\u00e2m \u0111\u1ed3ng",
             "district": "\u0111\u00e0 l\u1ea1t",

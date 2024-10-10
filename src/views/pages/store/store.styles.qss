@@ -1,3 +1,27 @@
 .store {
-    background-color: yellow;
+    background-color: transparent;
+}
+
+.store__list {
+    background-color: transparent;
+}
+.store__list__header {
+    margin: 4px 0;
+}
+.list__header__options {}
+.list__header__option {
+    margin: 0 4px;
+    height: 32px;
+    border: 1px solid #979797;
+    background: transparent;
+    border-radius: 4px;
+}
+.list__header__option.activated {
+    color: blue;
+    border: 1px solid rgb(0, 145, 255);
+}
+
+.store__detail {
+    background-color: black;
+    max-width: 20em;
 }

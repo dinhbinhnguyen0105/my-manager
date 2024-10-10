@@ -21,8 +21,8 @@ def info_write(payload):
         else:
             FileHandle.create_dir(current_img_dir)
             destination_imgs = img_save(payload["images"], current_img_dir)
-            if not destination_imgs: return { "data": False, "message": f"An error occurred while copying the image from directory {payload['images']} to directory {current_img_dir}."}
-        payload["images"] = destination_imgs
+            if not destination_imgs["data"]: return { "data": False, "message": f"An error occurred while copying the image from directory {payload['images']} to directory {current_img_dir}."}
+        payload["images"] = destination_imgs["data"]
         FileHandle.create_dir(img_dir)
         file_info = None
         real_estate_file = os.path.abspath(os.path.join(option_dir, "real-estate.json"))
@@ -54,8 +54,8 @@ def info_write(payload):
         else:
             FileHandle.create_dir(current_img_dir)
             destination_imgs = img_save(payload["images"], current_img_dir)
-            if not destination_imgs: return { "data": False, "message": f"An error occurred while copying the image from directory {payload['images']} to directory {current_img_dir}."}
-        payload["images"] = destination_imgs
+            if not destination_imgs["data"]: return { "data": False, "message": f"An error occurred while copying the image from directory {payload['images']} to directory {current_img_dir}."}
+        payload["images"] = destination_imgs["data"]
         FileHandle.create_dir(img_dir)
         file_info = None
         miscellaneous_file = os.path.abspath(os.path.join(option_dir, "miscellaneous.json"))
@@ -73,8 +73,16 @@ def info_write(payload):
         return { "data": payload, "message": "successfully"}
 
 def info_read():
+    result = {}
+    data_files = FileHandle.get_data_file(DB_DIR)
+    for data_file in data_files:
+        data_file_name = os.path.basename(data_file)
+        with open(data_file, "r", encoding="utf8") as f:
+            data = json.load(f)
+        result[data_file_name.split(".")[0]] = data
+    return result
 
-    pass
+info_read()
 
 def info_del():
 
@@ -106,3 +114,19 @@ def img_del(img_dir):
     shutil.rmtree(img_dir)
     return { "data" : True, "message": "successfullly"}
     
+
+def dict_find_value(data, key):
+    if isinstance(data, dict):
+        for k, v in data.items():
+            if k == key:
+                return v
+            elif isinstance(v, (dict, list)):
+                result = dict_find_value(v, key)
+                if result is not None:
+                    return result
+    elif isinstance(data, list):
+        for item in data:
+            result = dict_find_value(item, key)
+            if result is not None:
+                return result
+    return None

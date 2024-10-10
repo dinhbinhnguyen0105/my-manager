@@ -14,8 +14,10 @@ ICONS_DIR = os.path.abspath(os.path.join(MAIN_DIR, "assets", "icons"))
 from ..utils import handle_widget
 
 class Sidebar(QFrame):
-    current_page_index = pyqtSignal(int)
+    current_page_index_event = pyqtSignal(int)
     def __init__(self, parent=None):
+        self.current_page_index = None
+
         super().__init__(parent)
         self.setProperty("class", "sidebar")
         main_layout = QVBoxLayout()
@@ -31,14 +33,14 @@ class Sidebar(QFrame):
         self.home_btn_widget.setIconSize(QSize(26, 26))
 
         self.store_btn_widget = QPushButton(self)
-        self.store_btn_widget.setProperty("class", "button btn-store")
+        self.store_btn_widget.setProperty("class", "button btn-store activated")
         self.store_btn_widget.setObjectName("btn-store")
         self.store_btn_widget.setIcon(QIcon(os.path.join(ICONS_DIR, "store.svg")))
         self.store_btn_widget.setIconSize(QSize(26, 26))
 
         self.robot_btn_widget = QPushButton(self)
-        self.robot_btn_widget.setProperty("class", "button btn-robot activated")
-        self.store_btn_widget.setObjectName("btn-robot")
+        self.robot_btn_widget.setProperty("class", "button btn-robot")
+        self.robot_btn_widget.setObjectName("btn-robot")
         self.robot_btn_widget.setIcon(QIcon(os.path.join(ICONS_DIR, "robot.svg")))
         self.robot_btn_widget.setIconSize(QSize(26, 26))
 
@@ -55,6 +57,14 @@ class Sidebar(QFrame):
             self.my_styles = f.read()
         self.setStyleSheet(self.my_styles)
     
+    def showEvent(self, e):
+        button_widgets = handle_widget.find_widgets_by_class(self, QPushButton, "button")
+        for index, button_widget in enumerate(button_widgets):
+            if "activated" in button_widget.property("class"):
+                self.current_page_index = index
+                self.current_page_index_event.emit(self.current_page_index)
+                return
+    
     def handle_click(self, current_btn_widget):
         button_widgets = handle_widget.find_widgets_by_class(self, QPushButton, "button")
         activated_button_widget = handle_widget.find_widgets_by_class(self, QPushButton, "activated")[0]
@@ -64,7 +74,7 @@ class Sidebar(QFrame):
             if button_widget != current_btn_widget: handle_widget.remove_class(button_widget, "activated")
             else:
                 handle_widget.add_class(button_widget, "activated")
-                self.current_page_index.emit(index)
+                self.current_page_index_event.emit(index)
 
         self.setStyleSheet(self.my_styles)
 

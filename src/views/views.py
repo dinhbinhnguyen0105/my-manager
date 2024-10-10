@@ -20,7 +20,7 @@ class View(QFrame):
 
         self.pages = Pages(self)
         self.sidebar = Sidebar(self)
-        self.sidebar.current_page_index.connect(self.handle_set_current_page)
+        self.sidebar.current_page_index_event.connect(self.handle_set_current_page)
         main_layout.addWidget(self.sidebar)
         # main_layout.setAlignment(Qt.AlignLeft)
         main_layout.addWidget(self.pages)
@@ -28,6 +28,9 @@ class View(QFrame):
         with open(f"{MY_DIR}/views.styles.qss", "r") as f:
             styles = f.read()
         self.setStyleSheet(styles)
+    
+    # def showEvent(self, e):
+
     
     def handle_set_current_page(self, index):
         self.pages.handel_set_page(index)
