@@ -41,6 +41,7 @@ class Options(QFrame):
         option_widgets = handle_widget.find_widgets_by_class(self, QPushButton, "list__header__option")
         self.current_option_index = 0
         handle_widget.add_class(option_widgets[0], "activated")
+        self.current_option_widget_event.emit(option_widgets[0])
         self.setStyleSheet(self.styleSheet())
     
     def handle_option_clicked(self, current_option_widget):

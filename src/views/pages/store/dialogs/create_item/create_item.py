@@ -1,5 +1,5 @@
-import os, sys
-from PyQt5.QtWidgets import QDialog, QVBoxLayout, QFrame, QStackedWidget, QPushButton
+import os, sys, datetime
+from PyQt5.QtWidgets import QDialog, QVBoxLayout, QFrame, QStackedWidget, QPushButton, QLabel
 from PyQt5.QtCore import Qt
 
 MY_DIR = os.path.abspath(os.path.join(__file__, os.path.pardir))
@@ -28,6 +28,10 @@ class CreateItem(QDialog):
 
         self.options_widget = CreateItem_Options(self)
         self.options_widget.current_option_event.connect(self.handle_set_option_page)
+        self.date_widget = QLabel(self)
+        self.date_widget.setProperty("class", "content__date")
+        self.date_widget.setText(self.set_date())
+        self.date_widget.setAlignment(Qt.AlignCenter)
         
         self.re_page_widget = CreateItemRe(self)
         self.fashion_page_widget = CreateItemFashion(self)
@@ -48,12 +52,18 @@ class CreateItem(QDialog):
         self.create_container_widget.addWidget(self.miscellaneous_page_widget)
 
         main_layout.addWidget(self.options_widget)
+        main_layout.addWidget(self.date_widget)
         main_layout.addWidget(self.create_container_widget)
         main_layout.addWidget(self.savebutton_widget)
 
         with open(os.path.join(MY_DIR, "create_item.styles.qss"), "r") as f:
             self.my_styles = f.read()
         self.setStyleSheet(self.my_styles)
+    
+    def set_date(self):
+        now = datetime.datetime.now()
+        date = f"{now.strftime('%m')}-{now.strftime('%d')}-{now.strftime('%y')}"
+        return date
 
     def handle_set_option_page(self, current_button_widget):
         current_option_index = current_button_widget.property("option-index")
@@ -64,17 +74,18 @@ class CreateItem(QDialog):
     
     def handle_clicked(self):
         current_option = self.options_widget.get_value()
+        current_date = self.date_widget.text()
+        data = {**current_option, **{"date" : current_date}}
         if current_option["option"] == "real-estate":
-            _ = {**current_option, **self.re_page_widget.get_value()}
+            _ = {**data, **self.re_page_widget.get_value()}
             write_result = info_write(_)
             return write_result
         elif current_option["option"] == "fashion": pass
         elif current_option["option"] == "food": pass
         elif current_option["option"] == "travel": pass
         elif current_option["option"] == "miscellaneous":
-            _ = { **current_option, **self.miscellaneous_page_widget.get_value()}
+            _ = { **data, **self.miscellaneous_page_widget.get_value()}
             write_result = info_write(_)
-            print(write_result)
             return write_result
         self.close()
 

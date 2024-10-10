@@ -75,6 +75,6 @@ class Detail(QFrame):
             "function": self.function_widget.get_value(),
             "furniture": self.furniture_widget.get_value(),
             "legal": self.legal_widget.get_value(),
-            "price ": price,
+            "price": price,
         }
     

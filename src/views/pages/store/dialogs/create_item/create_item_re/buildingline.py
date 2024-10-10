@@ -30,7 +30,7 @@ class Buildingline(QFrame):
         buildingline_car_widget = QPushButton(self)
         buildingline_car_widget.setObjectName("buildingline_car")
         buildingline_car_widget.setProperty("class", "option")
-        buildingline_car_widget.setProperty("user-data", "card")
+        buildingline_car_widget.setProperty("user-data", "car")
         buildingline_car_widget.setProperty("option-index", 0)
         buildingline_car_widget.setText("Car")
         buildingline_car_widget.clicked.connect(lambda : self.handle_buildingline_clicked(buildingline_car_widget))
