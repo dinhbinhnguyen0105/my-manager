@@ -17,6 +17,8 @@ class Store(QFrame):
         self.setLayout(main_layout)
         
         self.store_list = StoreList(self)
+        self.store_list.body.double_clicked_data_event.connect(self.handle_show_detail_dialog)
+        self.store_list.body.one_clicked_data_event.connect(self.handle_set_detail)
         self.store_detail = StoreDetail(self)
 
         main_layout.addWidget(self.store_list)
@@ -26,3 +28,9 @@ class Store(QFrame):
         with open(os.path.join(MY_DIR, "store.styles.qss"), "r") as f:
             self.my_styles = f.read()
         self.setStyleSheet(self.my_styles)
+    
+    def handle_show_detail_dialog(self, id):
+        print(id)
+    
+    def handle_set_detail(self, id):
+        print(id)

@@ -42,15 +42,32 @@
 .list__header__search_ext {}
 
 .store__detail {
-    background-color: black;
     max-width: 20em;
+    min-width: 10em;
 }
 
+.store__detail__header {
+    margin: 4px 4px;
+    text-align: center;
+    color: rgb(0, 145, 255);
+    font-weight: bold;
+}
+
+.label {
+    height: 14px;
+    margin-top: 12px;
+    font-size: 10px;
+    color: rgb(0, 145, 255);
+}
 .lineedit {
     margin: 0 2px;
     border-radius: 4px;
     height: 24px;
     border: 1px solid darkgray;
 }
-.lineedit::placeholder {
+.plaintext {
+    min-height: 5em;
+    margin: 4px 4px;
+    border: 1px solid gray;
+    border-radius: 4px;
 }

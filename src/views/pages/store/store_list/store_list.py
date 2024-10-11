@@ -21,7 +21,7 @@ class StoreList(QFrame):
         main_layout.setSpacing(0)
         self.setLayout(main_layout)
         main_layout.setAlignment(Qt.AlignTop)
-
+        self.option = None
         self.header = Header(self)
         self.header.options_widget.current_option_widget_event.connect(self.handle_option_changed)
         self.body = Body(self)
@@ -31,14 +31,14 @@ class StoreList(QFrame):
     
 
     def handle_option_changed(self, option_widget):
-        option = option_widget.property("user-data")
-        data_from_file = products.info_read()[option]
+        self.option = option_widget.property("user-data")
+        data_from_file = products.info_read()[self.option]
         self.data = []
-        if option == "real-estate":
+        if self.option == "real-estate":
             for _data in data_from_file.values():
                 for product in _data:
                     self.data.append(product)
-        elif option == "miscellaneous":
+        elif self.option == "miscellaneous":
             for key, value in data_from_file.items():
                 self.data.append({
                     "id": key,

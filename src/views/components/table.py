@@ -9,6 +9,8 @@ from PyQt5.QtCore import Qt, pyqtSignal
 # from logic.db.local import products
 
 class Table(QFrame):
+    target_cell_data_event = pyqtSignal(dict)
+    target_row_data_event = pyqtSignal(dict)
     def __init__(self, parent=None):
         super().__init__(parent)
         self.setProperty("class", "table")
@@ -19,9 +21,12 @@ class Table(QFrame):
         self.setLayout(main_layout)
         main_layout.setAlignment(Qt.AlignTop)
 
+        self.target_column = None
+        self.prev_cell = None
+
         self.table_widget = QTableWidget(self)
         self.table_widget.setSelectionBehavior(QAbstractItemView.SelectRows)
-
+        # self.table_widget.cellClicked.connect(self.on_cell_clicked)
         main_layout.addWidget(self.table_widget)
 
     def match_filters(self, data, filters):
@@ -59,6 +64,9 @@ class Table(QFrame):
                 "furniture": "Furniture",
             }
             self.table_widget.setHorizontalHeaderLabels(header_dict.values())
+            for i, key in enumerate(header_dict.keys()):
+                _header = self.table_widget.horizontalHeaderItem(i)
+                _header.setData(Qt.UserRole, { "value": header_dict[key]})
             for row, product in enumerate(self.data):
                 for col, header in enumerate(header_dict.keys()):
                     if header in product.keys():
@@ -80,6 +88,9 @@ class Table(QFrame):
                 "description": "Description",
             }
             self.table_widget.setHorizontalHeaderLabels(header_dict.values())
+            for i, key in enumerate(header_dict.keys()):
+                _header = self.table_widget.horizontalHeaderItem(i)
+                _header.setData(Qt.UserRole, { "value": header_dict[key]})
             for row, product in enumerate(self.data):
                 for col, header in enumerate(header_dict.keys()):
                     if header in product.keys():
@@ -88,10 +99,28 @@ class Table(QFrame):
                         item = QTableWidgetItem(value)
                         self.table_widget.setItem(row, col, item)
 
-    # def on_cell_clicked(self, row, column):
-    #     column_count = self.table_widget.columnCount()
-    #     self.table_widget.setRangeSelected(
-    #         QTableWidgetSelectionRange(row, 0, row, column_count - 1),
-    #         QAbstractItemView.SelectRows
-    #     )
-           
+    # def on_cell_clicked(self, row):
+    #     if self.target_column == None:
+    #         self.target_cell_data_event.emit({ "data": "undefined"})
+    #     else:
+    #         _ = self.table_widget.item(row, self.target_column) 
+    #         if _: self.target_cell_data_event.emit({ self.target_column: _.text() })
+    #         else: self.target_cell_data_event.emit({ "data": "undefined"})
+    #     self.row_data = {}
+    #     for i in range(self.table_widget.columnCount()):
+    #         _ = self.table_widget.item(row, i)
+    #         column_header_item = self.table_widget.horizontalHeaderItem(i)
+    #         column_name = column_header_item.text()
+    #         if not _: self.row_data = { **self.row_data}
+    #         else:
+    #             self.row_data = {
+    #                 **self.row_data,
+    #                 **{ column_name: _.text() }
+    #             }
+    #     self.target_row_data_event.emit(self.row_data)
+    
+    
+            
+    # def set_target_column(self, index):
+    #     self.target_column = index
+    

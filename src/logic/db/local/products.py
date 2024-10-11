@@ -79,7 +79,8 @@ def info_read():
         data_file_name = os.path.basename(data_file)
         with open(data_file, "r", encoding="utf8") as f:
             data = json.load(f)
-        result[data_file_name.split(".")[0]] = data
+        _ = data_file_name.split(".")[0]
+        result[_] = data
     return result
 
 info_read()
