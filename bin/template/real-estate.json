@@ -1,0 +1,14 @@
+{
+    "default": {
+        "title": [
+            "[{type}]{icon}{icon}CẦN {type} {category} CHỈ {price} Ở {district}, {provide}{icon}{icon}"
+        ],
+        "description": [
+            "\n🆔 #ID: {id}\n🗺 Vị trí: đường {street}, {ward}, {district}\n📏 Diện tích: {area}m2\n🏗 Kết cấu: {construction}\n🛌 Công năng: {function}\n📺 Nội thất: {furniture}\n🚗 Lộ giới: {building_line}\n📜 Pháp lý: {legal}\n{icon}{icon} Mô tả:\n{description}\n------------\n💵 Giá: {price}- Thương lượng chính chủ\n☎ Liên hệ: 0375.155.525 - Mr. Bình\n🌺🌺🌺🌺🌺🌺🌺🌺🌺🌺🌺🌺🌺\n🌺Ký gửi mua, bán - cho thuê, thuê bất động sản xin liên hệ 0375.155.525 - Mr. Bình🌺\n🌺🌺🌺🌺🌺🌺🌺🌺🌺🌺🌺🌺🌺\n"
+        ]
+    },
+    "random": {
+        "title": [],
+        "description": []
+    }
+}
