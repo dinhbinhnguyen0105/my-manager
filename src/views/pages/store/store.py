@@ -2,10 +2,15 @@ import os, sys
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QFrame, QHBoxLayout, QHBoxLayout, QStackedWidget, QWidget, QLabel
 
-MY_DIR = os.path.abspath(os.path.join(__file__, os.path.pardir))
-
 from .store_list.store_list import StoreList
 from .store_detail.store_detail import StoreDetail
+
+MY_DIR = os.path.abspath(os.path.dirname(__file__))
+SRC_DIR = os.path.abspath(os.path.join(MY_DIR, os.path.pardir, os.path.pardir, os.path.pardir, ))
+sys.path.append(SRC_DIR)
+from logic.utils.product_handle import ProductHandle
+from logic.utils.temp_handle import TemplateHandle
+
 
 class Store(QFrame):
     def __init__(self, parent=None):
@@ -21,7 +26,12 @@ class Store(QFrame):
         self.store_list.body.one_clicked_data_event.connect(self.handle_set_detail)
         self.store_detail = StoreDetail(self)
 
+        v_line = QFrame()
+        v_line.setFrameShape(QFrame.VLine)
+        v_line.setFrameShadow(QFrame.Sunken)
+
         main_layout.addWidget(self.store_list)
+        main_layout.addWidget(v_line)
         main_layout.addWidget(self.store_detail)
 
         self.setLayout(main_layout)
@@ -33,4 +43,11 @@ class Store(QFrame):
         print(id)
     
     def handle_set_detail(self, id):
-        print(id)
+        product_info = ProductHandle.get_product_buy_id({ "option": self.store_list.option, **id})
+        product = TemplateHandle.render_content({ "action": "default", "product_info": product_info})
+        imgs_of_product_path = ProductHandle.get_images_buy_path(product_info["images"])
+        # imgs_of_product_path
+        self.store_detail.set_details({
+            **product,
+            **{ "images" : imgs_of_product_path}
+        })

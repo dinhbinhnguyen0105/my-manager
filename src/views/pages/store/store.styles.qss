@@ -4,6 +4,7 @@
 
 .store__list {
     background-color: transparent;
+    margin-right: 8px;
 }
 .store__list__header {
     margin: 4px 0;
@@ -29,28 +30,103 @@
     max-width: 10em;
     max-height: 5em;
 }
+.list__header__search_ext {}
+
+.header__search_btn {
+    margin: 8px;
+    min-width: 24px;
+    min-height: 24px;
+    max-width: 24px;
+    max-height: 24px;
+    border-radius: 12px;
+    border: 1px solid #979797;
+}
+.header__search_btn::pressed {
+    background-color: #979797;
+}
+.header__search-refresh-button {
+    margin-left: 24px;
+}
+.header__search-download-button {
+    margin-right: 24px;
+}
+
 .header__search-ext-button {
     margin: 0 8px;
-    max-width: 16px;
-    max-height: 16px;
-    border-radius: 8px;
+    min-width: 24px;
+    min-height: 24px;
+    max-width: 24px;
+    max-height: 24px;
+    border-radius: 12px;
     border: 0;
 }
 .header__search-ext-button::pressed {
-    background-color: #68BBE3;
+    background-color: rgb(17, 113, 217);
 }
-.list__header__search_ext {}
 
 .store__detail {
     max-width: 20em;
     min-width: 10em;
+    margin-left: 8px;
 }
 
-.store__detail__header {
-    margin: 4px 4px;
-    text-align: center;
-    color: rgb(0, 145, 255);
-    font-weight: bold;
+.detail__header__btn {
+    margin: 8px 0px;
+    min-width: 24px;
+    min-height: 24px;
+    border-radius: 12px;
+}
+.detail__header__btn::pressed {
+    background-color: rgb(17, 113, 217);
+}
+.detail__header__add-btn::hover {
+    background-color: rgb(153, 232, 168);
+}
+.detail__header__add-btn::pressed {
+    background-color: rgba(153, 232, 168, 0.7);
+}
+.detail__header__edit-btn::hover {
+    background-color: rgb(16, 123, 206);
+}
+.detail__header__edit-btn::pressed {
+    background-color: rgba(16, 123, 206, 0.7);
+}
+.detail__header__block-btn{
+    margin-right: 8px;
+}
+.detail__header__block-btn::hover {
+    background-color: rgb(253, 116, 29);
+}
+.detail__header__block-btn::pressed {
+    background-color: rgba(253, 116, 29, 0.7);
+}
+.detail__header__delete-btn {
+    margin: 0 8px;
+}
+.detail__header__delete-btn:hover{
+    background-color: rgb(255, 33, 18);
+}
+.detail__header__delete-btn:pressed{
+    background-color: rgba(255, 33, 18, .7);
+}
+
+.store__detail__images {
+    margin-left: 4px;
+}
+.store__detail__title {}
+.store__detail__description {}
+.store__detail__footer {
+    margin: 8px 0;
+}
+.detail__footer__btn {
+    margin: 0 4px;
+    height: 32px;
+    border: 1px solid #979797;
+    background: transparent;
+    border-radius: 4px;
+}
+.detail__footer__btn::pressed {
+    background-color: rgb(17, 113, 217);
 }
 
 .label {

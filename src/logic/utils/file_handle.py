@@ -1,7 +1,6 @@
 import os
 
 class FileHandle():
-
     @staticmethod
     def create_dir(_path):
         current_dir = ""
@@ -13,10 +12,7 @@ class FileHandle():
     
     @staticmethod
     def find_data_file(_path):
-        print(os.path.isdir(_path))
-
         current_path = _path
-
         for root, dirs, files in os.walk(current_path):
             print(f"root: {root} - dirs: {dirs} - files: {files}")
 

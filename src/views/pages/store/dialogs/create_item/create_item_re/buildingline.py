@@ -31,7 +31,7 @@ class Buildingline(QFrame):
         buildingline_car_widget.setObjectName("buildingline_car")
         buildingline_car_widget.setProperty("class", "option")
         buildingline_car_widget.setProperty("user-data", "car")
-        buildingline_car_widget.setProperty("option-index", 0)
+        buildingline_car_widget.setProperty("option-index", 1)
         buildingline_car_widget.setText("Car")
         buildingline_car_widget.clicked.connect(lambda : self.handle_buildingline_clicked(buildingline_car_widget))
         
@@ -50,7 +50,6 @@ class Buildingline(QFrame):
         handle_widget.add_class(current_widget, "activated")
         self.current_buildingline = current_widget
         self.current_buildingline_event.emit(self.current_buildingline)
-
         self.setStyleSheet(self.parent().styleSheet())
 
     def get_value(self):
