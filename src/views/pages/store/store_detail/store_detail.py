@@ -1,12 +1,16 @@
 import os, sys
-from PyQt5.QtWidgets import QVBoxLayout, QFrame, QLabel
+from PyQt5.QtWidgets import QVBoxLayout, QFrame
+from PyQt5.QtGui import QIcon
 from PyQt5.QtCore import Qt
 from .images import Images
 from .header.header import Header
 from .footer.footer import Footer
 MY_DIR = os.path.abspath(os.path.join(__file__, os.path.pardir))
 SRC_DIR = os.path.abspath(os.path.join(MY_DIR, os.path.pardir,os.path.pardir,os.path.pardir, os.path.pardir))
+ASSETS_DIR = os.path.abspath(os.path.join(SRC_DIR, os.path.pardir, "assets"))
+
 sys.path.append(SRC_DIR)
+
 from views.utils import handle_widget
 from views.components.lineedit import LineEdit
 from views.components.plaintext import Plaintext
@@ -24,13 +28,9 @@ class StoreDetail(QFrame):
 
         self.setFixedWidth(300)
 
-        # self.header_widget = QLabel("Detail", self)
-        # self.header_widget.setProperty("class", "store__detail__header")
-        # self.header_widget.setAlignment(Qt.AlignCenter)
-
         self.header_widget = Header(self)
         self.header_widget.edit_btn_widget.setDisabled(True)
-        self.header_widget.block_btn_widget.setDisabled(True)
+        self.header_widget.status_btn_widget.setDisabled(True)
         self.header_widget.delete_btn_widget.setDisabled(True)
 
         self.image_widget = Images({
@@ -81,5 +81,16 @@ class StoreDetail(QFrame):
         self.footer_widget.default_btn_widget.setDisabled(False)
         self.footer_widget.random_btn_widget.setDisabled(False)
         self.header_widget.edit_btn_widget.setDisabled(False)
-        self.header_widget.block_btn_widget.setDisabled(False)
+        self.header_widget.status_btn_widget.setDisabled(False)
+        if payload["status"] == "available":
+            block_icon = QIcon(os.path.abspath(os.path.join(ASSETS_DIR, "icons", "block.svg")))
+            self.header_widget.status_btn_widget.setProperty("class", "detail__header__btn detail__header__block-btn")
+            self.header_widget.status_btn_widget.setProperty("user-data", "block")
+            self.header_widget.status_btn_widget.setIcon(block_icon)
+        elif payload["status"] == "unavailable":
+            self.header_widget.status_btn_widget.setProperty("class", "detail__header__btn detail__header__check-btn")
+            check_icon = QIcon(os.path.abspath(os.path.join(ASSETS_DIR, "icons", "check.svg")))
+            self.header_widget.status_btn_widget.setIcon(check_icon)
+        self.setStyleSheet(self.styleSheet())
+
         self.header_widget.delete_btn_widget.setDisabled(False)

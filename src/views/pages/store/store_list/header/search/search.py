@@ -30,6 +30,7 @@ class Search(QFrame):
         self.search_base_widget = SearchBase(self)
         self.search_base_widget.ext_button_event.connect(self.handle_show_search_ext)
         self.search_base_widget.base_filter_event.connect(self.handle_ext_payload)
+        
         h_line = QFrame()
         h_line.setFrameShape(QFrame.HLine)
         h_line.setFrameShadow(QFrame.Sunken)
@@ -37,7 +38,7 @@ class Search(QFrame):
         main_layout.addWidget(self.search_base_widget)
         main_layout.addWidget(h_line)
     
-    def handle_show_search_ext(self, ext_status):
+    def handle_show_search_ext(self, ext_status=True):
         if ext_status:
             self.search_ext_widget = SearchExt(self)
             self.search_ext_widget.set_filter_widgets(self.option)

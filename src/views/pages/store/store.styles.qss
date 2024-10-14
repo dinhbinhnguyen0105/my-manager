@@ -100,6 +100,15 @@
 .detail__header__block-btn::pressed {
     background-color: rgba(253, 116, 29, 0.7);
 }
+.detail__header__check-btn{
+    margin-right: 8px;
+}
+.detail__header__check-btn::hover {
+    background-color: rgb(153, 232, 168);
+}
+.detail__header__check-btn::pressed {
+    background-color: rgba(153, 232, 168, 0.7);
+}
 .detail__header__delete-btn {
     margin: 0 8px;
 }

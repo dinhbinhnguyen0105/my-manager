@@ -75,7 +75,7 @@ class CreateItem(QDialog):
     def handle_clicked(self):
         current_option = self.options_widget.get_value()
         current_date = self.date_widget.text()
-        data = {**current_option, **{"date" : current_date}}
+        data = {**current_option, **{"date" : current_date}, **{"status": "available"}}
         if current_option["option"] == "real-estate":
             _ = {**data, **self.re_page_widget.get_value()}
             write_result = info_write(_)
@@ -84,10 +84,14 @@ class CreateItem(QDialog):
         elif current_option["option"] == "food": pass
         elif current_option["option"] == "travel": pass
         elif current_option["option"] == "miscellaneous":
-            _ = { **data, **self.miscellaneous_page_widget.get_value()}
+            _ = { **data, **self.miscellaneous_page_widget.get_value(), **{"status": "available"}}
             write_result = info_write(_)
             return write_result
         self.close()
+    
+    def handle_set_data(self, payload):
+
+        pass
 
 if __name__ == '__main__':
     from PyQt5.QtWidgets import QApplication

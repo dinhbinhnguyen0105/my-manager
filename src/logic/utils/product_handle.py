@@ -17,6 +17,9 @@ class ProductHandle():
                 for products in data.values():
                     for product in products:
                         if "id" in product.keys() and product["id"].lower() == payload["id"].lower(): return product
+            elif payload["option"] == "miscellaneous":
+                for id in data.keys():
+                    if id.lower() == payload["id"].lower(): return data[id]
         return { "data": False, "message": "id not in data" }
     @staticmethod
     def get_images_buy_path(_path):

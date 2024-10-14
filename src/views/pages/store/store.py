@@ -45,9 +45,12 @@ class Store(QFrame):
     def handle_set_detail(self, id):
         product_info = ProductHandle.get_product_buy_id({ "option": self.store_list.option, **id})
         product = TemplateHandle.render_content({ "action": "default", "product_info": product_info})
-        imgs_of_product_path = ProductHandle.get_images_buy_path(product_info["images"])
-        # imgs_of_product_path
+        if "images" not in product_info.keys(): imgs_of_product_path = []
+        else: imgs_of_product_path = ProductHandle.get_images_buy_path(product_info["images"])
+        if "status" not in product_info.keys(): status = "available"
+        else: status = product_info["status"]
         self.store_detail.set_details({
             **product,
-            **{ "images" : imgs_of_product_path}
+            **{ "images" : imgs_of_product_path},
+            **{ "status" : status}
         })

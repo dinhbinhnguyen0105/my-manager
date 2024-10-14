@@ -23,14 +23,7 @@ class Header(QFrame):
         main_layout.setAlignment(Qt.AlignTop)
 
         self.options_widget = Options(self)
-        self.options_widget.current_option_widget_event.connect(self.set_search_ext_content)
+        self.search_widget = Search("real-estate", self)
         
         main_layout.addWidget(self.options_widget)
-
-    def set_search_ext_content(self, option_widget):
-        option = option_widget.property("user-data")
-        if hasattr(self, "search_widget"):
-            self.search_widget.setParent(None)
-            self.search_widget.deleteLater()
-        self.search_widget = Search(option, self)
-        self.layout().addWidget(self.search_widget)
+        main_layout.addWidget(self.search_widget)

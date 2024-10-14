@@ -1,6 +1,6 @@
 import os, sys
 from PyQt5.QtWidgets import QVBoxLayout, QFrame
-from PyQt5.QtCore import Qt
+from PyQt5.QtCore import Qt, pyqtSignal
 
 from .header.header import Header
 from .body.body import Body
@@ -12,6 +12,7 @@ from views.utils import handle_widget
 from logic.db.local import products
 
 class StoreList(QFrame):
+    re_render_table_event = pyqtSignal()
     def __init__(self, parent=None):
         super().__init__(parent)
         self.setProperty("class", "store__list")
@@ -23,7 +24,8 @@ class StoreList(QFrame):
         main_layout.setAlignment(Qt.AlignTop)
         self.option = None
         self.header = Header(self)
-        self.header.options_widget.current_option_widget_event.connect(self.handle_option_changed)
+        self.header.options_widget.current_option_widget_event.connect(lambda option_widget: self.handle_option_changed(option_widget.property("user-data")))
+        self.header.search_widget.search_base_widget.refresh_btn_clicked_event.connect(lambda : self.handle_re_render_table(self.option))
         self.body = Body(self)
 
         main_layout.addWidget(self.header)
@@ -31,7 +33,7 @@ class StoreList(QFrame):
     
 
     def handle_option_changed(self, option_widget):
-        self.option = option_widget.property("user-data")
+        self.option = option_widget
         data_from_file = products.info_read()[self.option]
         self.data = []
         if self.option == "real-estate":
@@ -49,6 +51,10 @@ class StoreList(QFrame):
             "filter": [],
         })
         self.header.search_widget.filter_payload_event.connect( lambda payload: self.handle_filter(self.data, payload))
+    
+    def handle_re_render_table(self, option_widget):
+        self.handle_option_changed(option_widget)
+        self.re_render_table_event.emit()
 
     def handle_filter(self, data, filters):
         list_of_filter = []

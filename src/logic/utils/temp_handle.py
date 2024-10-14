@@ -1415,9 +1415,9 @@ class TemplateHandle():
         else: product_info = payload["product_info"]
         if "action" not in payload.keys(): return { "data": False, "message": "'action' not in payload.keys()"}
         else: action = payload["action"]
-
-        template = TemplateHandle.get_template({ "option": product_info["option"], "action": action })
+        if "option" not in product_info.keys(): return { "data": False, "message": "'option' not in payload.keys()"}
         if product_info["option"] == "real-estate":
+            template = TemplateHandle.get_template({ "option": product_info["option"], "action": action })
             new_product_info = {}
             for key in product_info.keys():
                 new_product_info[key] = product_info[key]
@@ -1505,6 +1505,10 @@ class TemplateHandle():
             
             template["title"] = template["title"].upper()
             return template
+        elif product_info["option"] == "miscellaneous": MyCustomError("invalid option")
+        else: raise("invalid option")
+class MyCustomError(Exception):
+    pass
 
 if __name__ == "__main__":
     TemplateHandle.render_content({

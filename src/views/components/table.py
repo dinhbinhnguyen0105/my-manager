@@ -1,6 +1,7 @@
 
 from PyQt5.QtWidgets import QHBoxLayout, QFrame, QTableWidget, QTableWidgetItem, QTableWidgetSelectionRange, QAbstractItemView
 from PyQt5.QtCore import Qt, pyqtSignal
+from PyQt5.QtGui import QColor
 
 # MY_DIR = os.path.abspath(os.path.join(__file__, os.path.pardir))
 # SRC_DIR = os.path.abspath(os.path.join(MY_DIR, os.path.pardir,os.path.pardir))
@@ -68,6 +69,11 @@ class Table(QFrame):
                 _header = self.table_widget.horizontalHeaderItem(i)
                 _header.setData(Qt.UserRole, { "value": header_dict[key]})
             for row, product in enumerate(self.data):
+                if "status" in product.keys() and product["status"] == "unavailable":
+                    _status = False
+                else: _status = True
+                if "is_uploaded" in product.keys() and product["is_uploaded"] == True:
+                    pass
                 for col, header in enumerate(header_dict.keys()):
                     if header in product.keys():
                         value = str(product[header])
@@ -79,6 +85,7 @@ class Table(QFrame):
                         else:
                             value = value.title()
                         item = QTableWidgetItem(value)
+                        if not _status: item.setBackground(QColor(253, 116, 29))
                         self.table_widget.setItem(row, col, item)
         elif self.data[0]["option"] == "miscellaneous":
             self.table_widget.setColumnCount(3)
@@ -98,29 +105,3 @@ class Table(QFrame):
                         if header == "id": value = value.upper()
                         item = QTableWidgetItem(value)
                         self.table_widget.setItem(row, col, item)
-
-    # def on_cell_clicked(self, row):
-    #     if self.target_column == None:
-    #         self.target_cell_data_event.emit({ "data": "undefined"})
-    #     else:
-    #         _ = self.table_widget.item(row, self.target_column) 
-    #         if _: self.target_cell_data_event.emit({ self.target_column: _.text() })
-    #         else: self.target_cell_data_event.emit({ "data": "undefined"})
-    #     self.row_data = {}
-    #     for i in range(self.table_widget.columnCount()):
-    #         _ = self.table_widget.item(row, i)
-    #         column_header_item = self.table_widget.horizontalHeaderItem(i)
-    #         column_name = column_header_item.text()
-    #         if not _: self.row_data = { **self.row_data}
-    #         else:
-    #             self.row_data = {
-    #                 **self.row_data,
-    #                 **{ column_name: _.text() }
-    #             }
-    #     self.target_row_data_event.emit(self.row_data)
-    
-    
-            
-    # def set_target_column(self, index):
-    #     self.target_column = index
-    

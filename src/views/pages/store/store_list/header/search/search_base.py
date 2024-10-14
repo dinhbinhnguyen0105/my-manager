@@ -14,6 +14,7 @@ from views.components.lineedit import LineEdit
 class SearchBase(QFrame):
     ext_button_event = pyqtSignal(bool)
     base_filter_event = pyqtSignal(dict)
+    refresh_btn_clicked_event = pyqtSignal()
     def __init__(self, parent=None):
         super().__init__(parent)
         self.setProperty("class", "list__header__search_base")
@@ -84,6 +85,7 @@ class SearchBase(QFrame):
         self.ext_button_widget.setIcon(icon)
         self.ext_button_event.emit(self.current_ext_status)
 
-    def handle_refresh_btn_pressed(self): pass
+    def handle_refresh_btn_pressed(self):
+        self.refresh_btn_clicked_event.emit()
     def handle_upload_btn_pressed(self): pass
     def handle_download_button_pressed(self): pass
