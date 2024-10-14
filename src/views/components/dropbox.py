@@ -1,7 +1,7 @@
 import sys
-from PyQt5.QtWidgets import QVBoxLayout,QLabel,QFrame,QStackedWidget
-from PyQt5.QtCore import Qt, pyqtSignal, QSize
-from PyQt5.QtGui import QDragEnterEvent, QDragMoveEvent, QDropEvent, QPixmap, QWheelEvent, QMouseEvent
+from PyQt5.QtWidgets import QLabel
+from PyQt5.QtCore import Qt, pyqtSignal
+from PyQt5.QtGui import QDragEnterEvent, QDragMoveEvent, QDropEvent
 
 class Dropbox(QLabel):
     e_dropped_urls = pyqtSignal(list)

@@ -35,10 +35,10 @@ class Header(QFrame):
         
         self.status_btn_widget = QPushButton(self)
         self.status_btn_widget.setObjectName("detail__header__status-btn")
-        self.status_btn_widget.setProperty("class", "detail__header__btn detail__header__status-btn")
         self.status_btn_widget.setProperty("user-data", "block")
         block_icon = QIcon(os.path.abspath(os.path.join(ASSETS_DIR, "icons", "block.svg")))
         self.status_btn_widget.setIcon(block_icon)
+        self.status_btn_widget.setProperty("class", "detail__header__btn detail__header__status-btn detail__header__status-block-btn")        
         self.status_btn_widget.clicked.connect(self.on_status_btn_clicked)
         
         self.delete_btn_widget = QPushButton(self)
